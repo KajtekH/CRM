@@ -13,6 +13,7 @@ public class CourseMapper {
     public static CourseDTO mapToCourseDTO(Course course) {
         return new CourseDTO(
                 course.getId(),
+                course.getPrice(),
                 course.getTitle(),
                 course.getDescription(),
                 course.getStartDate(),
@@ -23,6 +24,7 @@ public class CourseMapper {
 
     public static Course mapToCourse(CreateCourseDTO createCourseDTO) {
         return new Course(
+                createCourseDTO.price(),
                 createCourseDTO.title(),
                 createCourseDTO.description(),
                 createCourseDTO.startDate(),

@@ -3,6 +3,7 @@ package com.kajtekh.courseservice.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private BigDecimal price;
     private String title;
     private String description;
     private LocalDate startDate;
@@ -28,7 +29,8 @@ public class Course {
 
     public Course(){};
 
-    public Course(String title, String description, LocalDate startDate, LocalDate endDate, CourseType courseType) {
+    public Course(BigDecimal price, String title, String description, LocalDate startDate, LocalDate endDate, CourseType courseType) {
+        this.price = price;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
