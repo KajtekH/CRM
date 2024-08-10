@@ -1,16 +1,16 @@
 package com.kajtekh.courseservice.Service;
 
 import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.CourseDTO;
+import com.kajtekh.courseservice.Model.DTO.CourseDTO;
+import com.kajtekh.courseservice.Model.DTO.CreateCourseDTO;
 
 public class CourseMapper {
 
     private CourseMapper() {
     }
 
-    ;
 
-    public static CourseDTO maptoCourseDTO(Course course) {
+    public static CourseDTO mapToCourseDTO(Course course) {
         return new CourseDTO(
                 course.getId(),
                 course.getTitle(),
@@ -20,5 +20,16 @@ public class CourseMapper {
                 course.getCourseType()
         );
     }
+
+    public static Course mapToCourse(CreateCourseDTO createCourseDTO) {
+        return new Course(
+                createCourseDTO.title(),
+                createCourseDTO.description(),
+                createCourseDTO.startDate(),
+                createCourseDTO.endDate(),
+                createCourseDTO.courseType()
+        );
+    }
+
 }
 
