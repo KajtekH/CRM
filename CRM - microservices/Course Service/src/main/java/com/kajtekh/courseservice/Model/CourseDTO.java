@@ -6,5 +6,6 @@ public record CourseDTO(Long id,
                         String title,
                         String description,
                         LocalDate startDate,
-                        LocalDate endDate) {
+                        LocalDate endDate,
+                        CourseType courseType) {
 }

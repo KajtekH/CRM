@@ -18,4 +18,8 @@ public class Course {
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    private CourseType courseType;
 }
