@@ -24,8 +24,8 @@ public class CourseService {
     }
 
     @Transactional
-    public Course addCourse(CreateCourseDTO createCourseDTO) {
-        return courseRepository.save(CourseMapper.mapToCourse(createCourseDTO));
+    public void addCourse(CreateCourseDTO createCourseDTO) {
+        courseRepository.save(CourseMapper.mapToCourse(createCourseDTO));
     }
 
     @Transactional(readOnly = true)
@@ -44,29 +44,31 @@ public class CourseService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public CourseDTO getCourseById(Long id) {
+        return CourseMapper.mapToCourseDTO(courseRepository.findById(id)
+                .orElseThrow(()-> new CourseNotFoundException(id)));
+    }
+
     @Transactional
     public Course updateCourse(Long id, UpdateCourseDTO updateCourseDTO) {
-        Optional<Course> courseToUpdate = courseRepository.findById(id);
-        if (courseToUpdate.isEmpty()) {
-            throw new CourseNotFoundException(id);
-        }
+        Course courseToUpdate = courseRepository.findById(id)
+                        .orElseThrow(()-> new CourseNotFoundException(id));
 
-        courseToUpdate.get().setPrice(updateCourseDTO.price());
-        courseToUpdate.get().setTitle(updateCourseDTO.title());
-        courseToUpdate.get().setDescription(updateCourseDTO.description());
-        courseToUpdate.get().setCourseType(updateCourseDTO.courseType());
-        courseToUpdate.get().setStartDate(updateCourseDTO.startDate());
-        courseToUpdate.get().setEndDate(updateCourseDTO.endDate());
+        courseToUpdate.setPrice(updateCourseDTO.price());
+        courseToUpdate.setTitle(updateCourseDTO.title());
+        courseToUpdate.setDescription(updateCourseDTO.description());
+        courseToUpdate.setCourseType(updateCourseDTO.courseType());
+        courseToUpdate.setStartDate(updateCourseDTO.startDate());
+        courseToUpdate.setEndDate(updateCourseDTO.endDate());
 
-        return courseRepository.save(courseToUpdate.get());
+        return courseRepository.save(courseToUpdate);
     }
 
     @Transactional
     public void deleteCourse(Long id) {
-        try{
-            courseRepository.deleteById(id);
-        }
-        catch(CourseNotFoundException e){
-        }
+        Course course = courseRepository.findById(id)
+                .orElseThrow(()-> new CourseNotFoundException(id));
+        courseRepository.delete(course);
     }
 }
