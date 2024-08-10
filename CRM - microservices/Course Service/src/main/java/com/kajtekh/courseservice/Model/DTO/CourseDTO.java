@@ -1,4 +1,6 @@
-package com.kajtekh.courseservice.Model;
+package com.kajtekh.courseservice.Model.DTO;
+
+import com.kajtekh.courseservice.Model.CourseType;
 
 import java.time.LocalDate;
 
