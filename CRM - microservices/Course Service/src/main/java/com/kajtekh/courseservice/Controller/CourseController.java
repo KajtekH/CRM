@@ -1,5 +1,6 @@
 package com.kajtekh.courseservice.Controller;
 
+import com.kajtekh.courseservice.Exception.CourseNotFoundException;
 import com.kajtekh.courseservice.Model.Course;
 import com.kajtekh.courseservice.Model.CourseType;
 import com.kajtekh.courseservice.Model.DTO.CourseDTO;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/COURSE-SERVICE/api/courses")
 public class CourseController {
     private final CourseService courseService;
 
@@ -29,12 +30,17 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
-        return ResponseEntity.ok(courseService.getCourseById(id));
+        try {
+            CourseDTO course = courseService.getCourseById(id);
+            return ResponseEntity.ok(course);
+        } catch (CourseNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/{type}")
+    @GetMapping("/type/{type}")
     public ResponseEntity<List<CourseDTO>> getCoursesByType(@PathVariable CourseType type) {
         return ResponseEntity.ok(courseService.getCoursesByType(type));
     }
@@ -51,8 +57,8 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getCourseById(id));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Map<String, Boolean>> deleteCourse(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
