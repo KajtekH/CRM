@@ -26,7 +26,7 @@ public class InMemoryCourseRepository implements CourseRepository {
 
     @Override
     public Optional<Course> findById(@NonNull Long id) {
-        return Optional.of(courses.get(id));
+        return Optional.ofNullable(courses.get(id));
     }
 
     @Override
