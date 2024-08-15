@@ -1,6 +1,7 @@
 package com.kajtekh.userservice.service;
 
 
+import com.kajtekh.userservice.exception.EmailException;
 import com.kajtekh.userservice.model.User;
 import com.kajtekh.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,18 @@ public class UserService {
 
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(Boolean.TRUE.equals(userExists(user))){
+            throw new EmailException(user.getEmail());
+        }
         return userRepository.save(user);
     }
 
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    private Boolean userExists(User user){
+        return userRepository.findByEmail(user.getEmail()).isPresent();
     }
 
 }
