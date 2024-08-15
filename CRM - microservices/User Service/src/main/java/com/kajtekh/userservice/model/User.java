@@ -3,6 +3,7 @@ package com.kajtekh.userservice.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -30,6 +32,13 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private Set<UserRole> roles;
+
+    public User(String username, String email, String password){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
