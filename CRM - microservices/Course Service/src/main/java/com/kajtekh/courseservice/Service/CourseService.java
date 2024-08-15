@@ -10,8 +10,6 @@ import com.kajtekh.courseservice.Model.DTO.UpdateCourseDTO;
 import com.kajtekh.courseservice.Repository.CourseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import java.util.EnumSet;
 import java.util.List;
 
