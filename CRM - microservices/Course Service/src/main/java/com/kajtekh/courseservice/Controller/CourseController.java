@@ -1,6 +1,7 @@
 package com.kajtekh.courseservice.Controller;
 
 import com.kajtekh.courseservice.Exception.CourseNotFoundException;
+import com.kajtekh.courseservice.Exception.InvalidCourseTypeException;
 import com.kajtekh.courseservice.Model.Course;
 import com.kajtekh.courseservice.Model.CourseType;
 import com.kajtekh.courseservice.Model.DTO.CourseDTO;
@@ -8,6 +9,7 @@ import com.kajtekh.courseservice.Model.DTO.CreateCourseDTO;
 import com.kajtekh.courseservice.Model.DTO.UpdateCourseDTO;
 import com.kajtekh.courseservice.Service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.antlr.v4.runtime.atn.SemanticContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,17 +34,18 @@ public class CourseController {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
-        try {
-            CourseDTO course = courseService.getCourseById(id);
-            return ResponseEntity.ok(course);
-        } catch (CourseNotFoundException ex) {
-            return ResponseEntity.notFound().build();
-        }
+        CourseDTO course = courseService.getCourseById(id);
+        return ResponseEntity.ok(course);
     }
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByType(@PathVariable CourseType type) {
-        return ResponseEntity.ok(courseService.getCoursesByType(type));
+    public ResponseEntity<List<CourseDTO>> getCoursesByType(@PathVariable  CourseType type) {
+        try{
+            return ResponseEntity.ok(courseService.getCoursesByType(type));
+        }
+        catch (InvalidCourseTypeException e){
+            return  ResponseEntity.badRequest().body(null);
+        }
     }
 
     @PostMapping

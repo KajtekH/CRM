@@ -1,6 +1,7 @@
 package com.kajtekh.courseservice.Service;
 
 import com.kajtekh.courseservice.Exception.CourseNotFoundException;
+import com.kajtekh.courseservice.Exception.InvalidCourseTypeException;
 import com.kajtekh.courseservice.Model.Course;
 import com.kajtekh.courseservice.Model.CourseType;
 import com.kajtekh.courseservice.Model.DTO.CourseDTO;
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.EnumSet;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CourseService {
@@ -38,6 +40,11 @@ public class CourseService {
 
     @Transactional(readOnly = true)
     public List<CourseDTO> getCoursesByType(CourseType courseType) {
+
+        if (!isValidCourseType(courseType)) {
+            throw new InvalidCourseTypeException(courseType);
+        }
+
         return courseRepository.findByCourseType(courseType)
                 .stream()
                 .map(CourseMapper::mapToCourseDTO)
@@ -71,4 +78,9 @@ public class CourseService {
                 .orElseThrow(()-> new CourseNotFoundException(id));
         courseRepository.delete(course);
     }
+
+    private boolean isValidCourseType(CourseType courseType) {
+        return courseType != null && EnumSet.allOf(CourseType.class).contains(courseType);
+    }
+
 }
