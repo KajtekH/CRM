@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Course Service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/coursedb?useSSl=false
+    username: root
+    password: Rootdatabase
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+
+server:
+  port: 8080
