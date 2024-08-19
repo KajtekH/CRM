@@ -38,4 +38,15 @@ public class UserService {
         return userRepository.findByEmail(user.getEmail()).isPresent();
     }
 
+    public User loginUser(User user) {
+        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+        if(userOptional.isPresent()){
+            User userFromDb = userOptional.get();
+            if(passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())){
+                return userFromDb;
+            }
+        }
+        return null;
+    }
+
 }

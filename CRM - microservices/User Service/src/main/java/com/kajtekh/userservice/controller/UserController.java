@@ -1,5 +1,6 @@
 package com.kajtekh.userservice.controller;
 
+import com.kajtekh.userservice.model.DTO.UserLoginDTO;
 import com.kajtekh.userservice.model.DTO.UserRegistrationDTO;
 import com.kajtekh.userservice.model.User;
 import com.kajtekh.userservice.service.UserMapper;
@@ -26,5 +27,10 @@ public class UserController {
     @GetMapping("/{username}")
     public Optional<User> getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
+    }
+
+    @PostMapping("/login")
+    public User loginUser(@RequestBody UserLoginDTO userDto) {
+        return userService.loginUser(UserMapper.mapToUser(userDto));
     }
 }
