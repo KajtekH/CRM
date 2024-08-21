@@ -34,10 +34,6 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    private Boolean userExists(User user){
-        return userRepository.findByEmail(user.getEmail()).isPresent();
-    }
-
     public User loginUser(User user) {
         Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
         if(userOptional.isPresent()){
@@ -47,6 +43,10 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    private Boolean userExists(User user){
+        return userRepository.findByEmail(user.getEmail()).isPresent();
     }
 
 }
