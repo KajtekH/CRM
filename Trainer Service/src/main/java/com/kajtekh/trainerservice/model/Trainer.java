@@ -1,7 +1,7 @@
 package com.kajtekh.trainerservice.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Data
@@ -18,10 +18,15 @@ public class Trainer {
 
     private String lastName;
 
-    private String expertise;
-
     private String bio;
 
     private String profilePictureUrl;
 
+    public Trainer(Long userId, String firstName, String lastName, String bio, String profilePictureUrl) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.profilePictureUrl = profilePictureUrl;
+    }
 }
