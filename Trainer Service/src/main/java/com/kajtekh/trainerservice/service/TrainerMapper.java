@@ -1,16 +1,19 @@
 package com.kajtekh.trainerservice.service;
 
 import com.kajtekh.trainerservice.model.Trainer;
+import com.kajtekh.trainerservice.model.dto.CreateTrainerDTO;
+import com.kajtekh.trainerservice.model.dto.PreviewTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.TrainerDTO;
 
 import java.util.Optional;
 
 public class TrainerMapper {
 
-    private TrainerMapper() {};
+    private TrainerMapper() {}
 
     public static TrainerDTO toTrainerDTO(Trainer trainer) {
-        return new TrainerDTO(trainer.getUserId(),
+        return new TrainerDTO(trainer.getId(),
+                trainer.getUserId(),
                 trainer.getFirstName(),
                 trainer.getLastName(),
                 Optional.ofNullable(trainer.getBio()),
@@ -23,5 +26,17 @@ public class TrainerMapper {
                 trainerDTO.lastName(),
                 trainerDTO.bio().orElse(null),
                 trainerDTO.profilePictureUrl().orElse(null));
+    }
+
+    public static Trainer toTrainer(CreateTrainerDTO createTrainerDTO) {
+        return new Trainer(createTrainerDTO.userId(),
+                createTrainerDTO.firstName(),
+                createTrainerDTO.lastName(),
+                createTrainerDTO.bio().orElse(null),
+                createTrainerDTO.profilePictureUrl().orElse(null));
+    }
+
+    public static PreviewTrainerDTO toPreviewTrainerDTO(Trainer trainer) {
+        return new PreviewTrainerDTO(trainer.getFirstName(), trainer.getLastName());
     }
 }
