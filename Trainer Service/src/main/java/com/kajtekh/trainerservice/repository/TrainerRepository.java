@@ -8,6 +8,6 @@ import java.util.List;
 public interface TrainerRepository extends CrudRepository<Trainer, Long> {
 
     Trainer findByUserId(Long userId);
-    Trainer findByFirstName(String firstName);
+    List<Trainer> findByFirstName(String firstName);
     List<Trainer> getAllTrainers();
 }
