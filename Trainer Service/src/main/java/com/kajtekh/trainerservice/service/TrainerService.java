@@ -7,6 +7,7 @@ import com.kajtekh.trainerservice.model.dto.PreviewTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.TrainerDTO;
 import com.kajtekh.trainerservice.model.dto.UpdateTrainerDTO;
 import com.kajtekh.trainerservice.repository.TrainerRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,24 +36,20 @@ public class TrainerService {
     }
 
     @Transactional(readOnly = true)
-    public List<PreviewTrainerDTO> getTrainersByFirstName(String firstName) {
-        return trainerRepository.findByFirstName(firstName).stream()
-                .map(TrainerMapper::toPreviewTrainerDTO)
-                .toList();
-    }
-
-    @Transactional(readOnly = true)
-    public List<TrainerDTO> getAllTrainers() {
-        return trainerRepository.findAll().stream()
-                .map(TrainerMapper::toTrainerDTO)
-                .toList();
-    }
-
-    @Transactional(readOnly = true)
-    public List<PreviewTrainerDTO> getTrainersPerPage(Long page, Long size) {
-        return trainerRepository.findAll().stream()
+    public List<PreviewTrainerDTO> getTrainersByFirstName(String firstName, Long page, Long size) {
+        PageRequest pageable = PageRequest.of(page.intValue() - 1, size.intValue());
+        return trainerRepository.findByFirstName(firstName, pageable).stream()
                 .map(TrainerMapper::toPreviewTrainerDTO)
                 .limit(page * size)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrainerDTO> getAllTrainers(Long page, Long size) {
+        PageRequest pageRequest = PageRequest.of(page.intValue() - 1, size.intValue());
+        return trainerRepository.findAll(pageRequest).stream()
+                .map(TrainerMapper::toTrainerDTO)
+                .limit(size)
                 .toList();
     }
 

@@ -25,8 +25,9 @@ public class TrainerController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TrainerDTO>> getAllTrainers() {
-        return ResponseEntity.ok(trainerService.getAllTrainers());
+    public ResponseEntity<List<TrainerDTO>> getAllTrainers(@RequestParam(name = "page", required = false, defaultValue = "1") Long page,
+                                                           @RequestParam(name = "size", required = false, defaultValue = "10") Long size) {
+        return ResponseEntity.ok(trainerService.getAllTrainers(page, size));
     }
 
     @GetMapping("/{id}")
@@ -35,8 +36,10 @@ public class TrainerController {
     }
 
     @GetMapping("/name/{firstName}")
-    public ResponseEntity<List<PreviewTrainerDTO>> getTrainersByFirstName(@PathVariable String firstName) {
-        return ResponseEntity.ok(trainerService.getTrainersByFirstName(firstName));
+    public ResponseEntity<List<PreviewTrainerDTO>> getTrainersByFirstName(@PathVariable String firstName,
+                                                                          @RequestParam(name = "page", required = false, defaultValue = "1") Long page,
+                                                                          @RequestParam(name = "size", required = false, defaultValue = "10") Long size) {
+        return ResponseEntity.ok(trainerService.getTrainersByFirstName(firstName, page, size));
     }
 
     @PostMapping
