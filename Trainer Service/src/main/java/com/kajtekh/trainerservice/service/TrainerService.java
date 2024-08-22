@@ -63,7 +63,9 @@ public class TrainerService {
 
     @Transactional
     public void deleteTrainer(Long id) {
-        trainerRepository.deleteById(id);
+        Trainer trainerToDelete = trainerRepository.findById(id)
+                .orElseThrow(() -> new TrainerNotFoundException(id));
+        trainerRepository.delete(trainerToDelete);
     }
 
 }
