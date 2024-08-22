@@ -10,5 +10,6 @@ public interface TrainerRepository extends CrudRepository<Trainer, Long> {
 
     Optional<Trainer> findByUserId(Long userId);
     List<Trainer> findByFirstName(String firstName);
-    List<Trainer> getAllTrainers();
+
+    List<Trainer> findAll();
 }

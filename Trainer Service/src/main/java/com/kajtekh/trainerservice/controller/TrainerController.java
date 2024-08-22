@@ -25,7 +25,7 @@ public class TrainerController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<PreviewTrainerDTO>> getAllTrainers() {
+    public ResponseEntity<List<TrainerDTO>> getAllTrainers() {
         return ResponseEntity.ok(trainerService.getAllTrainers());
     }
 
@@ -34,7 +34,7 @@ public class TrainerController {
         return ResponseEntity.ok(trainerService.getTrainerById(id));
     }
 
-    @GetMapping("/{firstName}")
+    @GetMapping("/name/{firstName}")
     public ResponseEntity<List<PreviewTrainerDTO>> getTrainersByFirstName(@PathVariable String firstName) {
         return ResponseEntity.ok(trainerService.getTrainersByFirstName(firstName));
     }

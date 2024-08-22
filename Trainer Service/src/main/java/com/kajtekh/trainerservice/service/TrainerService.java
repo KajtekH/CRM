@@ -42,15 +42,15 @@ public class TrainerService {
     }
 
     @Transactional(readOnly = true)
-    public List<PreviewTrainerDTO> getAllTrainers() {
-        return trainerRepository.getAllTrainers().stream()
-                .map(TrainerMapper::toPreviewTrainerDTO)
+    public List<TrainerDTO> getAllTrainers() {
+        return trainerRepository.findAll().stream()
+                .map(TrainerMapper::toTrainerDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public List<PreviewTrainerDTO> getTrainersPerPage(Long page, Long size) {
-        return trainerRepository.getAllTrainers().stream()
+        return trainerRepository.findAll().stream()
                 .map(TrainerMapper::toPreviewTrainerDTO)
                 .limit(page * size)
                 .toList();
