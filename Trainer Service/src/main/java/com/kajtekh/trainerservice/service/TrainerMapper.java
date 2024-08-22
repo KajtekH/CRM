@@ -4,6 +4,7 @@ import com.kajtekh.trainerservice.model.Trainer;
 import com.kajtekh.trainerservice.model.dto.CreateTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.PreviewTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.TrainerDTO;
+import com.kajtekh.trainerservice.model.dto.UpdateTrainerDTO;
 
 import java.util.Optional;
 
@@ -26,6 +27,13 @@ public class TrainerMapper {
                 trainerDTO.lastName(),
                 trainerDTO.bio().orElse(null),
                 trainerDTO.profilePictureUrl().orElse(null));
+    }
+
+    public static Trainer toTrainer(UpdateTrainerDTO updateTrainerDTO) {
+        return new Trainer(updateTrainerDTO.firstName(),
+                updateTrainerDTO.lastName(),
+                updateTrainerDTO.bio().orElse(null),
+                updateTrainerDTO.profilePictureUrl().orElse(null));
     }
 
     public static Trainer toTrainer(CreateTrainerDTO createTrainerDTO) {

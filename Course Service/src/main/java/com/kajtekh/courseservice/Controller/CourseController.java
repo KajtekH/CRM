@@ -18,8 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
-@RequestMapping("/COURSE-SERVICE/api/courses")
+@RequestMapping("/api/v1/courses")
 public class CourseController {
     private final CourseService courseService;
 
@@ -49,7 +51,7 @@ public class CourseController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     public void createCourse(@RequestBody CreateCourseDTO courseDTO) {
         courseService.addCourse(courseDTO);
     }

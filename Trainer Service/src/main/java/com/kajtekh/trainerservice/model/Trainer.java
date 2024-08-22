@@ -1,11 +1,13 @@
 package com.kajtekh.trainerservice.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name="trainers")
+@NoArgsConstructor
+@Table(name = "trainers")
 public class Trainer {
 
     @Id
@@ -24,6 +26,13 @@ public class Trainer {
 
     public Trainer(Long userId, String firstName, String lastName, String bio, String profilePictureUrl) {
         this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public Trainer(String firstName, String lastName, String bio, String profilePictureUrl) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;

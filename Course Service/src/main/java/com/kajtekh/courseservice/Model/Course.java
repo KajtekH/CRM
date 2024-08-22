@@ -2,13 +2,13 @@ package com.kajtekh.courseservice.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "courses")
 public class Course {
@@ -22,12 +22,8 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
-
     @Enumerated(EnumType.STRING)
     private CourseType courseType;
-
-
-    public Course(){};
 
     public Course(BigDecimal price, String title, String description, LocalDate startDate, LocalDate endDate, CourseType courseType) {
         this.price = price;

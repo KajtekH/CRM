@@ -5,6 +5,7 @@ import com.kajtekh.trainerservice.model.Trainer;
 import com.kajtekh.trainerservice.model.dto.CreateTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.PreviewTrainerDTO;
 import com.kajtekh.trainerservice.model.dto.TrainerDTO;
+import com.kajtekh.trainerservice.model.dto.UpdateTrainerDTO;
 import com.kajtekh.trainerservice.repository.TrainerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class TrainerService {
 
     private final TrainerRepository trainerRepository;
@@ -21,13 +23,22 @@ public class TrainerService {
     }
 
     @Transactional(readOnly = true)
-    public TrainerDTO getTrainerByUserId(Long userId) {
-        return TrainerMapper.toTrainerDTO(trainerRepository.findByUserId(userId));
+    public TrainerDTO getTrainerById(Long id) {
+        return TrainerMapper.toTrainerDTO(trainerRepository.findById(id)
+                .orElseThrow(() -> new TrainerNotFoundException(id)));
     }
 
     @Transactional(readOnly = true)
-    public List<Trainer> getTrainerByFirstName(String firstName) {
-        return trainerRepository.findByFirstName(firstName);
+    public TrainerDTO getTrainerByUserId(Long userId) {
+        return TrainerMapper.toTrainerDTO(trainerRepository.findByUserId(userId)
+                .orElseThrow(() -> new TrainerNotFoundException(userId)));
+    }
+
+    @Transactional(readOnly = true)
+    public List<PreviewTrainerDTO> getTrainersByFirstName(String firstName) {
+        return trainerRepository.findByFirstName(firstName).stream()
+                .map(TrainerMapper::toPreviewTrainerDTO)
+                .toList();
     }
 
     @Transactional(readOnly = true)
@@ -51,7 +62,7 @@ public class TrainerService {
     }
 
     @Transactional
-    public Trainer updateTrainer(Long id, TrainerDTO trainerDTO) {
+    public Trainer updateTrainer(Long id, UpdateTrainerDTO trainerDTO) {
         Trainer trainerToUpdate = trainerRepository.findById(id)
                 .orElseThrow(() -> new TrainerNotFoundException(id));
         trainerToUpdate.setFirstName(trainerDTO.firstName());
