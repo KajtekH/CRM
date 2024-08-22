@@ -14,6 +14,11 @@ public class InMemoryTrainerRepository implements TrainerRepository {
     private final Map<Long, Trainer> trainers = new HashMap<>();
     private Long mapKey = 1L;
 
+    public void clear(){
+        trainers.clear();
+        mapKey = 1L;
+    }
+
     @Override
     public Optional<Trainer> findByUserId(Long userId) {
         return Optional.ofNullable(trainers.values().stream()

@@ -19,7 +19,7 @@ public class TrainerService {
 
     private final TrainerRepository trainerRepository;
 
-    TrainerService(TrainerRepository trainerRepository) {
+    public TrainerService(TrainerRepository trainerRepository) {
         this.trainerRepository = trainerRepository;
     }
 
