@@ -37,10 +37,9 @@ public class TrainerService {
 
     @Transactional(readOnly = true)
     public List<PreviewTrainerDTO> getTrainersByFirstName(String firstName, Long page, Long size) {
-        PageRequest pageable = PageRequest.of(page.intValue() - 1, size.intValue());
-        return trainerRepository.findByFirstName(firstName, pageable).stream()
+        PageRequest pageRequest = PageRequest.of(page.intValue() - 1, size.intValue());
+        return trainerRepository.findByFirstName(firstName, pageRequest).stream()
                 .map(TrainerMapper::toPreviewTrainerDTO)
-                .limit(page * size)
                 .toList();
     }
 
@@ -49,7 +48,6 @@ public class TrainerService {
         PageRequest pageRequest = PageRequest.of(page.intValue() - 1, size.intValue());
         return trainerRepository.findAll(pageRequest).stream()
                 .map(TrainerMapper::toTrainerDTO)
-                .limit(size)
                 .toList();
     }
 
