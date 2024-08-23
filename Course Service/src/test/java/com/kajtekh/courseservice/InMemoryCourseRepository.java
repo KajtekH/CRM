@@ -53,42 +53,42 @@ public class InMemoryCourseRepository implements CourseRepository {
     ///Not used methods
 
     @Override
-    public <S extends Course> Iterable<S> saveAll(Iterable<S> entities) {
+    public <S extends Course> Iterable<S> saveAll(Iterable<S> entities) {  // Non implemented - method is empty
         return null;
     }
 
     @Override
-    public boolean existsById(Long aLong) {
+    public boolean existsById(Long aLong) {  // Non implemented - method is empty
         return false;
     }
 
     @Override
-    public Iterable<Course> findAllById(Iterable<Long> longs) {
+    public Iterable<Course> findAllById(Iterable<Long> longs) {  // Non implemented - method is empty
         return null;
     }
 
     @Override
-    public long count() {
+    public long count() {  // Non implemented - method is empty
         return 0;
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(Long aLong) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends Long> longs) {
+    public void deleteAllById(Iterable<? extends Long> longs) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Course> entities) {
+    public void deleteAll(Iterable<? extends Course> entities) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAll() {  // Non implemented - method is empty
 
     }
 
