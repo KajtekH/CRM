@@ -1,7 +1,6 @@
 package com.kajtekh.courseservice.exception;
 
 import com.kajtekh.courseservice.model.CourseType;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,13 +9,14 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.Objects;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     public void handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
         if (ex.getRequiredType() == CourseType.class) {
             throw new InvalidCourseTypeException(Objects.requireNonNull(ex.getValue()).toString());

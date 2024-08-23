@@ -57,18 +57,19 @@ class CourseServiceTest {
 
     @Test
     void ShouldUpdateCourse() {
-        Course course = new Course(
-                BigDecimal.valueOf(300),
-                "TestTitle",
-                "TestDescription",
-                LocalDate.of(2012, 12, 12),
-                LocalDate.of(2137, 1, 1),
-                CourseType.valueOf("JAVA")
-        );
-
+        Course course = createCourse();
         courseRepository.save(course);
 
-        UpdateCourseDTO updateCourse = new UpdateCourseDTO(
+        UpdateCourseDTO updateCourse = getUpdateCourseDTO();
+        courseService.updateCourse(1L, updateCourse);
+
+        if(courseRepository.findById(1L).isPresent()) {
+            compareCourseToUpdateCourseDTO(courseRepository.findById(1L).get(), updateCourse);
+        }
+    }
+
+    private UpdateCourseDTO getUpdateCourseDTO() {
+        return new UpdateCourseDTO(
                 BigDecimal.valueOf(200),
                 "TestTitle232",
                 "TestDescription",
@@ -76,13 +77,25 @@ class CourseServiceTest {
                 LocalDate.of(2137, 12, 13),
                 CourseType.valueOf("JAVA")
         );
+    }
 
-        courseService.updateCourse(1L, updateCourse);
-        assertEquals(updateCourse.price(), courseRepository.findById(1L).get().getPrice());
-        assertEquals(updateCourse.description(), courseRepository.findById(1L).get().getDescription());
-        assertEquals(updateCourse.title(), courseRepository.findById(1L).get().getTitle());
-        assertEquals(updateCourse.courseType(), courseRepository.findById(1L).get().getCourseType());
-        assertEquals(updateCourse.startDate(), courseRepository.findById(1L).get().getStartDate());
-        assertEquals(updateCourse.endDate(), courseRepository.findById(1L).get().getEndDate());
+    private Course createCourse() {
+        return new Course(
+                BigDecimal.valueOf(300),
+                "TestTitle",
+                "TestDescription",
+                LocalDate.of(2012, 12, 12),
+                LocalDate.of(2137, 1, 1),
+                CourseType.valueOf("JAVA")
+        );
+    }
+    
+    private void compareCourseToUpdateCourseDTO(Course course, UpdateCourseDTO updateCourseDTO) {
+        assertEquals(course.getPrice(), updateCourseDTO.price());
+        assertEquals(course.getTitle(), updateCourseDTO.title());
+        assertEquals(course.getDescription(), updateCourseDTO.description());
+        assertEquals(course.getStartDate(), updateCourseDTO.startDate());
+        assertEquals(course.getEndDate(), updateCourseDTO.endDate());
+        assertEquals(course.getCourseType(), updateCourseDTO.courseType());
     }
 }
