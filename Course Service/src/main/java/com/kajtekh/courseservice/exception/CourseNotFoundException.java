@@ -1,4 +1,4 @@
-package com.kajtekh.courseservice.Exception;
+package com.kajtekh.courseservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

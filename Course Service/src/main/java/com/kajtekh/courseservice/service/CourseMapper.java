@@ -1,8 +1,8 @@
-package com.kajtekh.courseservice.Service;
+package com.kajtekh.courseservice.service;
 
-import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.DTO.CourseDTO;
-import com.kajtekh.courseservice.Model.DTO.CreateCourseDTO;
+import com.kajtekh.courseservice.model.Course;
+import com.kajtekh.courseservice.model.dto.CourseDTO;
+import com.kajtekh.courseservice.model.dto.CreateCourseDTO;
 
 public class CourseMapper {
 

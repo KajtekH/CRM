@@ -1,4 +1,4 @@
-package com.kajtekh.courseservice.Model;
+package com.kajtekh.courseservice.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

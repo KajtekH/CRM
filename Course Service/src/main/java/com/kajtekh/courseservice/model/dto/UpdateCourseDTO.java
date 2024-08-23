@@ -1,11 +1,11 @@
-package com.kajtekh.courseservice.Model.DTO;
+package com.kajtekh.courseservice.model.dto;
 
-import com.kajtekh.courseservice.Model.CourseType;
+import com.kajtekh.courseservice.model.CourseType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record CreateCourseDTO(BigDecimal price,
+public record UpdateCourseDTO(BigDecimal price,
                               String title,
                               String description,
                               LocalDate startDate,

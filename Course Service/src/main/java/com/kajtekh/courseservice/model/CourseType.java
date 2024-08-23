@@ -1,4 +1,4 @@
-package com.kajtekh.courseservice.Model;
+package com.kajtekh.courseservice.model;
 
 public enum CourseType {
     WEB_DEVELOPMENT,

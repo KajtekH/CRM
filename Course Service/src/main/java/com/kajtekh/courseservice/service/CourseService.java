@@ -1,13 +1,13 @@
-package com.kajtekh.courseservice.Service;
+package com.kajtekh.courseservice.service;
 
-import com.kajtekh.courseservice.Exception.CourseNotFoundException;
-import com.kajtekh.courseservice.Exception.InvalidCourseTypeException;
-import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.CourseType;
-import com.kajtekh.courseservice.Model.DTO.CourseDTO;
-import com.kajtekh.courseservice.Model.DTO.CreateCourseDTO;
-import com.kajtekh.courseservice.Model.DTO.UpdateCourseDTO;
-import com.kajtekh.courseservice.Repository.CourseRepository;
+import com.kajtekh.courseservice.exception.CourseNotFoundException;
+import com.kajtekh.courseservice.exception.InvalidCourseTypeException;
+import com.kajtekh.courseservice.model.Course;
+import com.kajtekh.courseservice.model.CourseType;
+import com.kajtekh.courseservice.model.dto.CourseDTO;
+import com.kajtekh.courseservice.model.dto.CreateCourseDTO;
+import com.kajtekh.courseservice.model.dto.UpdateCourseDTO;
+import com.kajtekh.courseservice.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.EnumSet;

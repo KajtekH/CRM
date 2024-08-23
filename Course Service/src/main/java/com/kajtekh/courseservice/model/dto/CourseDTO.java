@@ -1,6 +1,6 @@
-package com.kajtekh.courseservice.Model.DTO;
+package com.kajtekh.courseservice.model.dto;
 
-import com.kajtekh.courseservice.Model.CourseType;
+import com.kajtekh.courseservice.model.CourseType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
-package com.kajtekh.courseservice.Exception;
+package com.kajtekh.courseservice.exception;
 
-import com.kajtekh.courseservice.Model.CourseType;
+import com.kajtekh.courseservice.model.CourseType;
 
 public class InvalidCourseTypeException extends RuntimeException {
    public InvalidCourseTypeException(CourseType courseType){

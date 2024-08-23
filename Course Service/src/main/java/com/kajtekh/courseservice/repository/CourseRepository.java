@@ -1,8 +1,7 @@
-package com.kajtekh.courseservice.Repository;
+package com.kajtekh.courseservice.repository;
 
-import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.CourseType;
-import org.springframework.data.jpa.repository.Query;
+import com.kajtekh.courseservice.model.Course;
+import com.kajtekh.courseservice.model.CourseType;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

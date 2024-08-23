@@ -1,8 +1,8 @@
 package com.kajtekh.courseservice;
 
-import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.CourseType;
-import com.kajtekh.courseservice.Repository.CourseRepository;
+import com.kajtekh.courseservice.model.Course;
+import com.kajtekh.courseservice.model.CourseType;
+import com.kajtekh.courseservice.repository.CourseRepository;
 import org.springframework.lang.NonNull;
 
 import java.util.*;

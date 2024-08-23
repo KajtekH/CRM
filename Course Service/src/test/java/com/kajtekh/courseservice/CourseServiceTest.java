@@ -1,12 +1,12 @@
 package com.kajtekh.courseservice;
 
 
-import com.kajtekh.courseservice.Exception.CourseNotFoundException;
-import com.kajtekh.courseservice.Model.Course;
-import com.kajtekh.courseservice.Model.CourseType;
-import com.kajtekh.courseservice.Model.DTO.CourseDTO;
-import com.kajtekh.courseservice.Model.DTO.UpdateCourseDTO;
-import com.kajtekh.courseservice.Service.CourseService;
+import com.kajtekh.courseservice.exception.CourseNotFoundException;
+import com.kajtekh.courseservice.model.Course;
+import com.kajtekh.courseservice.model.CourseType;
+import com.kajtekh.courseservice.model.dto.CourseDTO;
+import com.kajtekh.courseservice.model.dto.UpdateCourseDTO;
+import com.kajtekh.courseservice.service.CourseService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
