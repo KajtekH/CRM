@@ -57,50 +57,49 @@ public class InMemoryTrainerRepository implements TrainerRepository {
         trainers.remove(entity.getId());
     }
 
-    // Not used methods
 
     @Override
-    public <S extends Trainer> Iterable<S> saveAll(Iterable<S> entities) {
+    public <S extends Trainer> Iterable<S> saveAll(Iterable<S> entities) {  // Non implemented - method is empty
         return null;
     }
 
     @Override
-    public boolean existsById(Long aLong) {
+    public boolean existsById(Long aLong) {  // Non implemented - method is empty
         return false;
     }
 
     @Override
-    public Iterable<Trainer> findAll() {
+    public Iterable<Trainer> findAll() {  // Non implemented - method is empty
         return null;
     }
 
     @Override
-    public Iterable<Trainer> findAllById(Iterable<Long> longs) {
+    public Iterable<Trainer> findAllById(Iterable<Long> longs) {  // Non implemented - method is empty
         return null;
     }
 
     @Override
-    public long count() {
+    public long count() {  // Non implemented - method is empty
         return 0;
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(Long aLong) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends Long> longs) {
+    public void deleteAllById(Iterable<? extends Long> longs) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Trainer> entities) {
+    public void deleteAll(Iterable<? extends Trainer> entities) {  // Non implemented - method is empty
 
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAll() {  // Non implemented - method is empty
 
     }
 }
