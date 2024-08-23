@@ -2,6 +2,7 @@ package com.kajtekh.userservice.service;
 
 
 import com.kajtekh.userservice.exception.EmailException;
+import com.kajtekh.userservice.kafka.KafkaProducer;
 import com.kajtekh.userservice.model.User;
 import com.kajtekh.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,18 +17,24 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final KafkaProducer kafkaProducer;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, KafkaProducer kafkaProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(false);
         if(Boolean.TRUE.equals(userExists(user))){
             throw new EmailException(user.getEmail());
         }
+
+        kafkaProducer.sendMessage("User with email: " + user.getEmail() + " registered");
         return userRepository.save(user);
+
     }
 
     public Optional<User> getUserByUsername(String username) {

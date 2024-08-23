@@ -28,6 +28,8 @@ public class User implements UserDetails {
 
     private String password;
 
+    private Boolean active;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
