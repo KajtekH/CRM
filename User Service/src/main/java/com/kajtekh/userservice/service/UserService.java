@@ -32,7 +32,7 @@ public class UserService {
             throw new EmailException(user.getEmail());
         }
 
-        kafkaProducer.sendMessage("User with email: " + user.getEmail() + " registered");
+        kafkaProducer.sendMessage(user.getEmail());
         return userRepository.save(user);
 
     }
