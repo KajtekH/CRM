@@ -2,7 +2,7 @@ spring:
   application:
     name: Notification Service
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9092, kafka2:9093
     consumer:
       group-id: notification-service-group
       auto-offset-reset: earliest
@@ -23,6 +23,7 @@ spring:
           auth: true
           starttls:
             enable: true
-
+        ssl:
+         trust: smtp.gmail.com
 server:
   port: 8083
