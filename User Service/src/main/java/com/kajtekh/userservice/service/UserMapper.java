@@ -4,6 +4,8 @@ import com.kajtekh.userservice.model.DTO.UserLoginDTO;
 import com.kajtekh.userservice.model.DTO.UserRegistrationDTO;
 import com.kajtekh.userservice.model.User;
 
+import static com.kajtekh.userservice.model.UserRole.USER;
+
 public class UserMapper {
 
     private UserMapper(){}
@@ -12,7 +14,8 @@ public class UserMapper {
         return new User(
                 userRegistrationDTO.username(),
                 userRegistrationDTO.email(),
-                userRegistrationDTO.password()
+                userRegistrationDTO.password(),
+                USER
         );
     }
 

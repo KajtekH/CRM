@@ -5,8 +5,10 @@ import com.kajtekh.userservice.model.DTO.UserRegistrationDTO;
 import com.kajtekh.userservice.model.User;
 import com.kajtekh.userservice.service.UserMapper;
 import com.kajtekh.userservice.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +19,11 @@ public class UserController {
 
     public  UserController(UserService userService){
         this.userService = userService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUnactivatedUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping("/register")
@@ -32,5 +39,10 @@ public class UserController {
     @PostMapping("/login")
     public User loginUser(@RequestBody UserLoginDTO userDto) {
         return userService.loginUser(UserMapper.mapToUser(userDto));
+    }
+
+    @DeleteMapping("/{username}")
+    public void deleteUser(@PathVariable String username) {
+        userService.deleteUser(username);
     }
 }
