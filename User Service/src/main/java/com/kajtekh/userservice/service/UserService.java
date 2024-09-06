@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +27,7 @@ public class UserService {
         this.kafkaProducer = kafkaProducer;
     }
 
+    @Transactional
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(false);
@@ -37,10 +40,17 @@ public class UserService {
 
     }
 
+    @Transactional(readOnly = true)
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    @Transactional
     public User loginUser(User user) {
         Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
         if(userOptional.isPresent()){
@@ -50,6 +60,11 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    @Transactional
+    public void deleteUser(String username) {
+        userRepository.deleteByUsername(username);
     }
 
     private Boolean userExists(User user){
