@@ -30,5 +30,10 @@ logging:
         SQL: DEBUG
         type: TRACE
 
+jwt:
+  secret: secret
+  expiration: 86400000
+
+
 server:
   port: 8081
