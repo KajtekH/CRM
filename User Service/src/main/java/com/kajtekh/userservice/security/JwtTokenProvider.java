@@ -19,7 +19,7 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
         } catch(SignatureException | MalformedJwtException | ExpiredJwtException |
-                 UnsupportedJwtException | IllegalArgumentException ex) {
+                 UnsupportedJwtException | IllegalArgumentException ignored) {
 
         }
         return false;
