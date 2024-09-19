@@ -1,6 +1,6 @@
 spring:
   application:
-    name: User Service
+    name: USER-SERVICE
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/userdb?useSSl=false
     username: root
@@ -37,3 +37,7 @@ jwt:
 
 server:
   port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
